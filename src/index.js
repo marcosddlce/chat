@@ -5,7 +5,7 @@ const http = require('http')
 const morgan = require('morgan')
 //initialization
 const app = express();
-
+cd 
 app.set('views', path.join(__dirname,'views'))
 app.set('view engine', 'ejs')
 //add port
