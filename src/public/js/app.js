@@ -16,45 +16,67 @@ const username = document.querySelector('#username');
 
 // Objeto de mapeo del alfabeto normal
 const alphabet = {
-  a: 'z',
-  b: 'y',
-  c: 'x',
-  d: 'w',
-  e: 'v',
-  f: 'u',
-  g: 't',
-  h: 's',
-  i: 'r',
-  j: 'q',
-  k: 'p',
-  l: 'o',
-  m: 'n',
-  n: 'm',
-  o: 'l',
-  p: 'k',
-  q: 'j',
-  r: 'i',
-  s: 'h',
-  t: 'g',
-  u: 'f',
-  v: 'e',
-  w: 'd',
-  x: 'c',
-  y: 'b',
-  z: 'a'
-};
+  a: 'z', b: 'y', c: 'x', d: 'w', e: 'v', f: 'u', g: 't', h: 's', i: 'r', j: 'q', k: 'p', l: 'o', m: 'n', n: 'm', o: 'l', p: 'k', q: 'j', r: 'i', s: 'h', t: 'g', u: 'f', v: 'e', w: 'd', x: 'c', y: 'b', z: 'a'};
 
 // Función para encriptar el mensaje
 function encryptMessage(message) {
-  const encryptedMessage = message.toLowerCase().split('').map(letter => {
-    if (alphabet.hasOwnProperty(letter)) {
-      return alphabet[letter];
-    }
-    return letter;
-  }).join('');
+  const words = message.split(' ');
+
+  const encryptedWords = words.map(word => {
+    const encryptedWord = word.toLowerCase().split('').map(letter => {
+      if (alphabet.hasOwnProperty(letter)) {
+        return alphabet[letter];
+      }
+      return letter;
+    }).join('');
+    
+    return encryptedWord;
+  });
+
+  const encryptedMessage = encryptedWords.join(' ');
 
   return encryptedMessage;
 }
+
+// Función para desencriptar el mensaje
+function decryptMessage(encryptedMessage) {
+  const words = encryptedMessage.split(' ');
+
+  const decryptedWords = words.map(word => {
+    const decryptedWord = word.toLowerCase().split('').map(letter => {
+      const reversedAlphabet = Object.entries(alphabet).reduce((acc, [key, value]) => {
+        acc[value] = key;
+        return acc;
+      }, {});
+
+      if (reversedAlphabet.hasOwnProperty(letter)) {
+        return reversedAlphabet[letter];
+      }
+      return letter;
+    }).join('');
+
+    return decryptedWord;
+  });
+
+  const decryptedMessage = decryptedWords.join(' ');
+
+  return decryptedMessage;
+}
+
+
+// Evento de clic en el botón "desencriptar"
+const decryptButton = document.querySelector('#decrypt-button');
+decryptButton.addEventListener('click', () => {
+  const encryptedMessages = chat.querySelectorAll('p');
+  encryptedMessages.forEach(p => {
+    const encryptedMessage = p.textContent;
+    const decryptedMessage = decryptMessage(encryptedMessage);
+    p.textContent = decryptedMessage;
+  });
+});
+
+
+
 
 // Evento de envío del formulario de inicio de sesión
 nickForm.addEventListener('submit', (e) => {
