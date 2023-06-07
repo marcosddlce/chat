@@ -3,14 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat</title>
+  <title>
+    ChatUAA
+  </title>
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.min.css">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
   <nav id="nav" class="navbar navbar-dark bg-warning text-center">
-     <a class="navbar-brand mx-auto">ChatUAA</a>
+    <a class="navbar-brand mx-auto" id="logo">ChatUAA</a>
   </nav>
 
 <div class="card mx-auto mt-5 col-md-4" id="login">
@@ -47,10 +52,11 @@
               <i class="fa fa-location-arrow"></i>
                 send
             </button>
-            <button id="decrypt-button" style="background-color: #27374D; border: 1px solid #27374D; color: white;" type="submit" class="btn btn-warning">
-              <i class="fa fa-alert-arrow"></i>
-              Desencriptar
+            <button id="change-button" style="background-color: #27374D; border: 1px solid #27374D; color: white;" type="submit" class="btn btn-warning">
+              Cambio
             </button>
+            
+            <div id="encryption-steps"></div>
           </div>
         </form>
 

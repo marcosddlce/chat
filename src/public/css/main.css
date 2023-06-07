@@ -19,3 +19,53 @@ body {
 #content-wrap {
   display: none
 }
+
+.navbar-brand {
+  font-family: Arial, sans-serif;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.navbar-brand:hover {
+  transform: scale(2);
+}
+
+/* Personaliza el estilo del botón de cambio */
+#change-button {
+  margin-left: 10px;
+}
+
+/* Estilo para mostrar los pasos de encriptación */
+#encryption-steps {
+  margin-left: 10px;
+}
+
+/* Ajusta el tamaño del chat en dispositivos más pequeños */
+@media (max-width: 576px) {
+  #chat {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+}
+
+/* Estilo responsivo para la tarjeta de inicio de sesión */
+@media (max-width: 576px) {
+  .card.mx-auto.mt-5.col-md-4 {
+    width: 100%;
+  }
+}
+
+/* Estilo responsivo para el contenido envuelto */
+@media (max-width: 768px) {
+  #content-wrap {
+    flex-direction: column;
+  }
+}
+
+/* Estilo responsivo para las columnas del contenido */
+@media (max-width: 992px) {
+  .col-md-6 {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}

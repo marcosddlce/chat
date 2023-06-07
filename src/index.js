@@ -1,31 +1,41 @@
-const  express = require('express')
+const express = require('express');
 const path = require('path');
-const socket = require('socket.io')
-const http = require('http')
-const morgan = require('morgan')
-//initialization
+const socket = require('socket.io');
+const http = require('http');
+const morgan = require('morgan');
+
+// Inicialización
 const app = express();
-cd 
-app.set('views', path.join(__dirname,'views'))
-app.set('view engine', 'ejs')
-//add port
+const ipAddress = '192.168.1.81';
 const port = process.env.PORT || 3000;
 
-//connection 
+// Configuración del motor de plantillas EJS
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.engine('ejs', require('ejs').__express);
+
+// Creación del servidor HTTP
 const server = http.createServer(app);
-const io = socket.listen(server)
-require('./socket').connection(io)
+const io = socket.listen(server);
+require('./socket').connection(io);
 
-//middleware
-app.use(morgan('dev'))
+// Configuración del servidor y escucha
+server.listen(port, ipAddress, () => {
+  console.log(`Servidor en ejecución en http://${ipAddress}:${port}`);
+});
 
-//router
-app.get('/',(req,res,next)=>{
-  res.render('index')
-})
+// Middleware
+app.use(morgan('dev'));
 
-app.use(express.static(path.join(__dirname,'public')))
+// Rutas
+app.get('/', (req, res, next) => {
+  res.render('index');
+});
 
-server.listen(port, ()=>{
-  console.log('server on port 3000');
-})
+// Configuración de archivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Inicio del servidor
+server.listen(port, () => {
+  console.log(`Servidor en ejecución en http://localhost:${port}`);
+});
